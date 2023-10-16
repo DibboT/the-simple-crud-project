@@ -1,5 +1,4 @@
 
-
 import './App.css'
 
 function App() {
@@ -7,7 +6,7 @@ function App() {
     event.preventDefault();
     const form = event.target;
     const name = form.name.value;
-    const email = form.name.value;
+    const email = form.email.value;
     const user = {name, email};
     console.log(user);
 
@@ -22,18 +21,22 @@ function App() {
     .then(res => res.json())
     .then(data => {
       console.log(data);
+      if(data.insertedId){
+        alert('User Added Successfully')
+        form.reset();
+      }
     })
   }
 
   return (
     <>
-      <h1>Vite + React</h1>
+      <h1>Simple Input Form</h1>
       <form onSubmit={handleAddUser}>
         <input type="text" name="name" id=""/>
         <br/>
         <input type="email" name="email" id=""/>
         <br/>
-        <input type="submit" value="Add User"/>
+        <input type="submit" value="Add User" className="inputsubmit"/>
       </form>
       
     </>

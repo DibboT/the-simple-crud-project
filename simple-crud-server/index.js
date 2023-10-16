@@ -13,7 +13,7 @@ require('dotenv').config();
 
 
 
-const uri = "mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.igadn9s.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://DB_USER:DB_PASS@cluster0.igadn9s.mongodb.net/?retryWrites=true&w=majority";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
@@ -32,12 +32,24 @@ async function run() {
     const database = client.db("usersDB");
     const userCollection = database.collection("users");
 
+    app.get('/users', async(req, res) => {
+      const cursor = userCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    })
+
     app.post('/users', async(req, res) =>{
       const user = req.body;
       console.log(user)
       const result = await userCollection.insertOne(user);
       res.send(result);
     } )
+
+    app.delete('/users/:id', (req, res) =>{
+      const id = req.params.id;
+      console.log('Please Delete This One', id)
+    } )
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
