@@ -9,10 +9,7 @@ app.use(express.json());
 
 require('dotenv').config();
 
-//simpleCrud
-// /nqU0q9xHaII5FXoF
-// DB_USER = simpleCrud
-// DB_PASS = nqU0q9xHaII5FXoF
+
 
 
 
