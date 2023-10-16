@@ -7,14 +7,16 @@ const port = process.env.PORT || 5000
 app.use(cors());
 app.use(express.json());
 
-// require('dotenv').config();
+require('dotenv').config();
 
 //simpleCrud
 // /nqU0q9xHaII5FXoF
+// DB_USER = simpleCrud
+// DB_PASS = nqU0q9xHaII5FXoF
 
 
 
-const uri = "mongodb+srv://simpleCrud:nqU0q9xHaII5FXoF@cluster0.igadn9s.mongodb.net/?retryWrites=true&w=majority";
+const uri = "mongodb+srv://${DB_USER}:${DB_PASS}@cluster0.igadn9s.mongodb.net/?retryWrites=true&w=majority";
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
 const client = new MongoClient(uri, {
